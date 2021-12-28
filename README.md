@@ -2,9 +2,35 @@
 
 A few utils for Spring Boot apps to help you to stick to the DRY rule.
 
+### Table of Contents
+
+* [Getting Started](#getting-started)
+* [Features](#features)
+  * [Thread Name](#thread-name)
+      * [Configuration](#thread-name.configuration)
+      * [Usage](#thread-name.usage)
+      * [Customization](#thread-name.customization)
+      * [Examples](#thread-name.examples)
+  * [Logged Method](#logged-method)
+      * [Configuration](#logged-method.configuration)
+      * [Usage](#logged-method.usage)
+      * [Customization](#logged-method.customization)
+      * [Examples](#logged-method.examples)
+* [TODO ideas](#todos)
+
+<a id="getting-started">
+
 ## Getting Started
 
-Maven:
+</a>
+
+1. Check if your project meets the following criteria:
+
+* Java version: >= 17
+* Spring Boot version: >= 2.5.0
+* Latest Spring Boot version supported: 2.6.2
+
+2. Add the dependency:
 
 ```
 <dependency>
@@ -17,29 +43,47 @@ Maven:
 It's important to use Spring Boot version as a version of this library, since it inherits Spring Boot's dependency management POM. 
 The goal is to avoid lib versions conflicts in your project.
 
-### Compatibility
+3. Configure your application.
 
-* Java version: >= 17
-* Spring Boot version: >= 2.5.0
-* Latest Spring Boot version supported: 2.6.2
+You can configure all features at once by using `@EnableSpringBootUtils` annotation on any configuration class.
+Alternatively you can configure each feature separately (see the following sections).
 
-## How to use
+4. Use it!
+
+```
+@ThreadName
+@LoggedMethod
+void someMehod(String someArg, int otherArg) {
+    // do something
+}
+```
+
+<a id="features">
+
+## Features
+
+</a>
 
 Spring Boot Utils currently gives you 2 features:
-1. Thread naming.
-2. Method invocation logging.
+1. Thread Name - for naming threads.
+2. LoggedMethod - for method execution logging.
 
-You can configure all features at once by using `@EnableSpringBootUtils` annotation on any configuration class. 
-Alternatively you can configure each feature separately.
+<a id="thread-name">
 
-### Thread naming
+### Thread Name
+
+</a>
 
 Allows giving customized name to current thread for the time of method execution. 
 After method execution, previous thread name is by default restored to avoid logs misunderstanding.
 
 Each thread name will be suffixed with the subsequent id, which helps to distinguish separate flows with the same arguments' values.
 
+<a id="thread-name.configuration">
+
 #### Configuration
+
+</a>
 
 Before using annotation, just enable it with `@EnableSpringBootUtils` or `@EnableThreadName` on any configuration class.
 
@@ -50,23 +94,22 @@ The default is `0`.
 dv.utils.thread-name.initial-thread-id: 1000000
 ```
 
+<a id="thread-name.usage">
+
 #### Usage
+
+</a>
 
 To use it, just annotate any method with `@ThreadName`. 
 By default, this will rename a current thread to `Thread-0` for annotated method execution.
 
-I suggest using it at the entry points of your application, i.e. controller methods, message listener methods etc. 
+I suggest using it at the entry points of your application, i.e. controller methods, message listener methods etc.
 
-###### Example:
-
-```
-@ThreadName
-void someMethod() {
-    // do something
-}
-```
+<a id="thread-name.customization">
 
 #### Customization
+
+</a>
 
 You can customize thread name with annotation parameters:
 
@@ -74,7 +117,11 @@ You can customize thread name with annotation parameters:
 * `expressions` - array of SpEL (Spring Expression Language) expressions which points to the method arguments or method arguments' fields that should be attached to the thread name;
 * `restoreName` - when set to `false`, old thread name will NOT be restored after method executions (don't use it too often);
 
-###### Examples
+<a id="thread-name.examples">
+
+#### Examples
+
+</a>
 
 ```        
 @ThreadName("Prefix")
@@ -112,13 +159,19 @@ dv.utils.thread-name.initial-thread-id: 9000
 ```
 ... will produce thread name `Thread-9000`.
 
----
+<a id="logged-method">
 
-### Method logging
+### Logged Method
+
+</a>
 
 Allows printing message through slf4j logger before and after method invocation using just one annotation.
 
+<a id="logged-method.configuration">
+
 #### Configuration
+
+</a>
 
 Before using annotation, just configure it with `@EnableSpringBootUtils` or `@EnableLoggedMethod` on any configuration class.
 
@@ -129,22 +182,21 @@ The default level is `info`.
 dv.utils.logged-method.default-level: info
 ```
 
+<a id="logged-method.usage">
+
 #### Usage
+
+</a>
 
 To use it, just annotate any method with `@LoggedMethod`. By default, this will cause creating two log messages:
 * at the method invocation - containing method name and arguments values;
 * after method invocation - containing method result (returned value/thrown exception) and execution time.
 
-###### Example:
-
-```
-@LoggedMethod
-void someMethod() {
-    // do something
-}
-```
+<a id="logged-method.customization">
 
 #### Customization
+
+</a>
 
 You can customize messages with annotation parameters:
 
@@ -154,7 +206,11 @@ You can customize messages with annotation parameters:
 * `timing` - controls logging execution duration;
 * `exclude` - array of method argument names which values should NOT be printed (they will be replaced with ●●●● - useful for i.e. passwords).
 
-###### Examples
+<a id="logged-method.examples">
+
+#### Examples
+
+</a>
 
 ```
 @LoggedMethod
@@ -208,9 +264,11 @@ Invoked someMethod(value)
 Method someMethod threw NullPointerException(message=text)
 ```
 
----
+<a id="todos">
 
 ## TODO ideas
+
+</a>
 
 1. Customizable patterns for `@LoggedMethod`.
 
@@ -225,11 +283,11 @@ Providing pattern should bez prioritized over other options, i.e. if there is pr
 Example:
 For method declaration:
 ```
-String getMsisdn(Long id) throws CustomException;
+String getSmething(Long id) throws CustomException;
 ```
 and parameters:
-* `@LoggedMethod(invocationPattern = ">> ${method}(${args})"` should generate: `>> getMsisdn(123)`
-* `@LoggedMethod(returnPattern = "<< ${result}" in ${duration}` should generate: `<< 48123456789 in 123 ms`
+* `@LoggedMethod(invocationPattern = ">> ${method}(${args})"` should generate: `>> getSmething(123)`
+* `@LoggedMethod(returnPattern = "<< ${result}" in ${duration}` should generate: `<< abc in 123 ms`
 * `@LoggedMethod(throwPattern = "thrown: ${exception}" in ${duration}` should generate: `thrown CustomExcepttion(message=Error occurred) in 123 ms`
 
 PREFERRED ALTERNATIVE
