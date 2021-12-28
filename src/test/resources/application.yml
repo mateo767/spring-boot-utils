@@ -5,4 +5,4 @@ spring-boot-utils:
     default-level: info
 logging:
   level:
-    com.github.mateo767.springbootutils: debug
+    io.github.mateo767.springbootutils: debug

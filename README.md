@@ -34,7 +34,7 @@ A few utils for Spring Boot apps to help you to stick to the DRY rule.
 
 ```
 <dependency>
-    <groupId>com.github.mateo767</groupId>
+    <groupId>io.github.mateo767</groupId>
     <artifactId>spring-boot-utils</artifactId>
     <version>${spring.boot.version}</version>
 </dependency>
