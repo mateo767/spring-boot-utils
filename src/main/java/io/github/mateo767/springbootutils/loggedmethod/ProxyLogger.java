@@ -16,12 +16,21 @@ class ProxyLogger {
 
     void log(String format, Object... arguments) {
         switch (level) {
-            case ERROR -> targetLogger.error(format, arguments);
-            case WARN -> targetLogger.warn(format, arguments);
-            case INFO -> targetLogger.info(format, arguments);
-            case TRACE -> targetLogger.trace(format, arguments);
-            case DEBUG -> targetLogger.debug(format, arguments);
-            default -> targetLogger.debug(format, arguments);
+            case ERROR:
+                targetLogger.error(format, arguments);
+                break;
+            case WARN:
+                targetLogger.warn(format, arguments);
+                break;
+            case INFO:
+                targetLogger.info(format, arguments);
+                break;
+            case TRACE:
+                targetLogger.trace(format, arguments);
+                break;
+            case DEBUG:
+            default:
+                targetLogger.debug(format, arguments);
         }
     }
 

@@ -26,7 +26,7 @@ A few utils for Spring Boot apps to help you to stick to the DRY rule.
 
 1. Check if your project meets the following criteria:
 
-* Java version: >= 17
+* Java version: >= 11
 * Spring Boot version: >= 2.5.0
 * Latest Spring Boot version supported: 2.6.2
 
