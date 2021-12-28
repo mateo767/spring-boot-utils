@@ -1,4 +1,4 @@
-package com.larchsoftware.utils.springboot.loggedmethod;
+package com.github.mateo767.springbootutils.loggedmethod;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -32,7 +32,7 @@ class LoggedMethodProcessor {
         this.defaultLevel = defaultLevel;
     }
 
-    @Around("@annotation(LoggedMethod)")
+    @Around("@annotation(com.github.mateo767.springbootutils.loggedmethod.LoggedMethod)")
     Object processLoggedMethod(ProceedingJoinPoint joinPoint) throws Throwable {
         if (!METHOD_EXECUTION_JOIN_KIND.equals(joinPoint.getKind())) {
             log.error("unsupported joinPoint of kind {}", joinPoint.getKind());

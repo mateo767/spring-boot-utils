@@ -1,7 +1,7 @@
-package com.larchsoftware.utils.springboot.integration.threadname;
+package com.github.mateo767.springbootutils.integration.threadname;
 
-import com.larchsoftware.utils.springboot.integration.SomeObject;
-import com.larchsoftware.utils.springboot.threadname.ThreadName;
+import com.github.mateo767.springbootutils.integration.SomeObject;
+import com.github.mateo767.springbootutils.threadname.ThreadName;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

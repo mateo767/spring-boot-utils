@@ -1,8 +1,8 @@
-larchsoftware.utils:
+spring-boot-utils:
   thread-name:
     initial-thread-id: 9000000
   logged-method:
     default-level: info
 logging:
   level:
-    com.larchsoftware.utils: debug
+    com.github.mateo767.springbootutils: debug

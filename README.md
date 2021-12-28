@@ -8,7 +8,7 @@ Maven:
 
 ```
 <dependency>
-    <groupId>com.larchsoftware.utils</groupId>
+    <groupId>com.github.mateo767</groupId>
     <artifactId>spring-boot-utils</artifactId>
     <version>${spring.boot.version}</version>
 </dependency>

@@ -1,4 +1,4 @@
-package com.larchsoftware.utils.springboot.threadname;
+package com.github.mateo767.springbootutils.threadname;
 
 import org.springframework.core.annotation.AliasFor;
 

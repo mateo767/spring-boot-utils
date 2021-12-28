@@ -1,9 +1,9 @@
-package com.larchsoftware.utils.springboot.integration.loggedmethod;
+package com.github.mateo767.springbootutils.integration.loggedmethod;
 
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
-import com.larchsoftware.utils.springboot.integration.SomeObject;
+import com.github.mateo767.springbootutils.integration.SomeObject;
 import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

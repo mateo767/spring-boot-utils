@@ -1,10 +1,10 @@
-package com.larchsoftware.utils.springboot.threadname;
+package com.github.mateo767.springbootutils.threadname;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@ConfigurationProperties("larchsoftware.utils.thread-name")
+@ConfigurationProperties("spring-boot-utils.thread-name")
 @Getter
 @Setter
 class ThreadNameProperties {

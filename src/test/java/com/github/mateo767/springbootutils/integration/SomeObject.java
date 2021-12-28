@@ -1,4 +1,4 @@
-package com.larchsoftware.utils.springboot.integration;
+package com.github.mateo767.springbootutils.integration;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

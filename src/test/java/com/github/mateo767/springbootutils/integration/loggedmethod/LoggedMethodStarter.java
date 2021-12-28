@@ -1,6 +1,6 @@
-package com.larchsoftware.utils.springboot.integration.loggedmethod;
+package com.github.mateo767.springbootutils.integration.loggedmethod;
 
-import com.larchsoftware.utils.springboot.loggedmethod.EnableLoggedMethod;
+import com.github.mateo767.springbootutils.loggedmethod.EnableLoggedMethod;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

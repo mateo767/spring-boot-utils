@@ -1,6 +1,6 @@
-package com.larchsoftware.utils.springboot.integration.threadname;
+package com.github.mateo767.springbootutils.integration.threadname;
 
-import com.larchsoftware.utils.springboot.threadname.EnableThreadName;
+import com.github.mateo767.springbootutils.threadname.EnableThreadName;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

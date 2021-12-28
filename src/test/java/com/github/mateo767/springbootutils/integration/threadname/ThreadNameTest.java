@@ -1,6 +1,6 @@
-package com.larchsoftware.utils.springboot.integration.threadname;
+package com.github.mateo767.springbootutils.integration.threadname;
 
-import com.larchsoftware.utils.springboot.integration.SomeObject;
+import com.github.mateo767.springbootutils.integration.SomeObject;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;

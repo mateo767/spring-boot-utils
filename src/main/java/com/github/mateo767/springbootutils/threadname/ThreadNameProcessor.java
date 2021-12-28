@@ -1,4 +1,4 @@
-package com.larchsoftware.utils.springboot.threadname;
+package com.github.mateo767.springbootutils.threadname;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -30,7 +30,7 @@ class ThreadNameProcessor {
         this.threadId = new AtomicLong(initialThreadId);
     }
 
-    @Around("@annotation(ThreadName)")
+    @Around("@annotation(com.github.mateo767.springbootutils.threadname.ThreadName)")
     Object processThreadName(ProceedingJoinPoint joinPoint) throws Throwable {
         if (!METHOD_EXECUTION_JOIN_KIND.equals(joinPoint.getKind())) {
             log.error("unsupported joinPoint of kind {}", joinPoint.getKind());

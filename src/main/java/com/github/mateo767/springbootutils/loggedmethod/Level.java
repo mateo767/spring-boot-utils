@@ -1,4 +1,4 @@
-package com.larchsoftware.utils.springboot.loggedmethod;
+package com.github.mateo767.springbootutils.loggedmethod;
 
 /**
  * The log levels dictionary.

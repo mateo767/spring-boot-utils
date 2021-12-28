@@ -1,8 +1,8 @@
-package com.larchsoftware.utils.springboot.integration.loggedmethod;
+package com.github.mateo767.springbootutils.integration.loggedmethod;
 
-import com.larchsoftware.utils.springboot.integration.SomeObject;
-import com.larchsoftware.utils.springboot.loggedmethod.Level;
-import com.larchsoftware.utils.springboot.loggedmethod.LoggedMethod;
+import com.github.mateo767.springbootutils.integration.SomeObject;
+import com.github.mateo767.springbootutils.loggedmethod.Level;
+import com.github.mateo767.springbootutils.loggedmethod.LoggedMethod;
 import org.springframework.stereotype.Service;
 
 @SuppressWarnings({"unused", "SameParameterValue", "UnusedReturnValue"})

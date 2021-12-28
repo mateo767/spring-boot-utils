@@ -1,16 +1,16 @@
-package com.larchsoftware.utils.springboot.threadname;
+package com.github.mateo767.springbootutils.loggedmethod;
 
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
 
 /**
- * <p>Enables the Thread Name feature.</p>
+ * <p>Enables the Logged Method feature.</p>
  * <p>Use it on any Spring Boot configuration class to take effect.</p>
  */
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Import({ThreadNameConfiguration.class, ThreadNameProperties.class})
-public @interface EnableThreadName {
+@Import({LoggedMethodConfiguration.class, LoggedMethodProperties.class})
+public @interface EnableLoggedMethod {
 }

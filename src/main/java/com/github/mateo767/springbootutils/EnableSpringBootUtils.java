@@ -1,7 +1,7 @@
-package com.larchsoftware.utils.springboot;
+package com.github.mateo767.springbootutils;
 
-import com.larchsoftware.utils.springboot.loggedmethod.EnableLoggedMethod;
-import com.larchsoftware.utils.springboot.threadname.EnableThreadName;
+import com.github.mateo767.springbootutils.loggedmethod.EnableLoggedMethod;
+import com.github.mateo767.springbootutils.threadname.EnableThreadName;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
