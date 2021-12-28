@@ -1,6 +1,6 @@
 # Spring Boot Utils
 
-[![Build Status](https://app.travis-ci.com/mateo767/spring-boot-utils.svg?branch=master)](https://app.travis-ci.com/mateo767/spring-boot-utils)
+[![CircleCI](https://circleci.com/gh/mateo767/spring-boot-utils/tree/master.svg?style=svg)](https://circleci.com/gh/mateo767/spring-boot-utils/tree/master)
 
 A few utils for Spring Boot apps to help you to stick to the DRY rule.
 
