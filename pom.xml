@@ -163,10 +163,6 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
-                        <configuration>
-                            <dataFile>target/jacoco.exec</dataFile>
-                            <outputDirectory>target/my-reports</outputDirectory>
-                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
