@@ -29,8 +29,7 @@ A few utils for Spring Boot apps to help you to stick to the DRY rule.
 1. Check if your project meets the following criteria:
 
 * Java version: >= 11
-* Spring Boot version: >= 2.5.0
-* Latest Spring Boot version supported: 2.6.2
+* Spring Boot version: 2.4.0 >= SB <= 2.6.2
 
 2. Add the dependency:
 
@@ -38,12 +37,13 @@ A few utils for Spring Boot apps to help you to stick to the DRY rule.
 <dependency>
     <groupId>io.github.mateo767</groupId>
     <artifactId>spring-boot-utils</artifactId>
-    <version>${spring.boot.version}</version>
+    <version>1.0.0-${spring.boot.version}</version>
 </dependency>
 ```
 
-It's important to use Spring Boot version as a version of this library, since it inherits Spring Boot's dependency management POM. 
+It's important to extend library version with version of the Spring Boot you are using, since it inherits Spring Boot's dependency management POM. 
 The goal is to avoid lib versions conflicts in your project.
+For example for Spring Boot 2.6.2 and library you should use `1.0.0-2.6.2` as the dependency version.
 
 3. Configure your application.
 
