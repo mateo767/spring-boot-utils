@@ -2,12 +2,14 @@ package io.github.mateo767.springbootutils.integration.threadname;
 
 import io.github.mateo767.springbootutils.integration.SomeObject;
 import io.github.mateo767.springbootutils.threadname.ThreadName;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
-@Slf4j
 class ThreadNameService {
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @ThreadName("Prefix")
     String getThreadName() {

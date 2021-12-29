@@ -1,11 +1,11 @@
 package io.github.mateo767.springbootutils.loggedmethod;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 
@@ -14,7 +14,6 @@ import java.util.Arrays;
 import java.util.Optional;
 
 @Aspect
-@Slf4j
 class LoggedMethodProcessor {
 
     private static final String METHOD_EXECUTION_JOIN_KIND = "method-execution";
@@ -26,6 +25,7 @@ class LoggedMethodProcessor {
     private static final String AFTER_WO_THROWABLE_PATTERN = "Method {} threw exception";
     private static final String TIMING_PATTERN = " in {} ms";
     private static final String EXCLUDED_ARGUMENT_REPLACEMENT = "●●●●";
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final Level defaultLevel;
 
     LoggedMethodProcessor(Level defaultLevel) {

@@ -1,11 +1,12 @@
 package io.github.mateo767.springbootutils.threadname;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.expression.MethodBasedEvaluationContext;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.annotation.AnnotatedElementUtils;
@@ -18,12 +19,12 @@ import java.util.concurrent.atomic.AtomicLong;
 import static java.util.stream.Collectors.joining;
 
 @Aspect
-@Slf4j
 class ThreadNameProcessor {
 
     private static final String METHOD_EXECUTION_JOIN_KIND = "method-execution";
     private static final String SEPARATOR = "-";
     private static final SpelExpressionParser expressionParser = new SpelExpressionParser();
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final AtomicLong threadId;
 
     ThreadNameProcessor(long initialThreadId) {

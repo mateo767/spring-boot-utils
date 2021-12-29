@@ -22,15 +22,15 @@ class ProxyLogger {
             case WARN:
                 targetLogger.warn(format, arguments);
                 break;
-            case INFO:
-                targetLogger.info(format, arguments);
-                break;
             case TRACE:
                 targetLogger.trace(format, arguments);
                 break;
             case DEBUG:
-            default:
                 targetLogger.debug(format, arguments);
+                break;
+            case INFO:
+            default:
+                targetLogger.info(format, arguments);
         }
     }
 
