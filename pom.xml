@@ -9,6 +9,14 @@
     <name>spring-boot-utils</name>
     <description>Spring Boot Utils</description>
 
+    <url>https://github.com/mateo767/spring-boot-utils</url>
+    <developers>
+        <developer>
+            <name>Mateusz Kasperczyk</name>
+            <email>m.kasperczyk767@gmail.com</email>
+        </developer>
+    </developers>
+
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
