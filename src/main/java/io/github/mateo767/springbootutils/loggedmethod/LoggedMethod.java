@@ -22,7 +22,7 @@ public @interface LoggedMethod {
      *
      * @return the level to write logs at
      */
-    Level level() default Level.INFO;
+    Level level() default Level.DEFAULT;
 
     /**
      * Allows controlling whether arguments values should be logged.
@@ -46,8 +46,13 @@ public @interface LoggedMethod {
     boolean timing() default true;
 
     /**
+     * <p>ź
      * Allows pointing method arguments to exclude in the logger message. With logArguments=false, it's meaningless.
      * Excluded argument values will be replaced with ●●●● to keep argument order and count.
+     * </p>
+     * <p>
+     * It is not inherited from class annotation.
+     * </p>
      *
      * @return the array of method arguments to exclude
      */
