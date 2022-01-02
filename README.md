@@ -38,7 +38,7 @@ A few utils for Spring Boot apps to help you to stick to the DRY rule.
 <dependency>
     <groupId>io.github.mateo767</groupId>
     <artifactId>spring-boot-utils</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
 </dependency>
 ```
 
