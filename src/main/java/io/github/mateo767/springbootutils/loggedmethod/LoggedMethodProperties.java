@@ -6,6 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 class LoggedMethodProperties {
 
     private Level defaultLevel = Level.DEFAULT;
+    private Level defaultExceptionLevel = Level.DEFAULT;
 
     public Level getDefaultLevel() {
         return defaultLevel;
@@ -13,5 +14,13 @@ class LoggedMethodProperties {
 
     public void setDefaultLevel(Level defaultLevel) {
         this.defaultLevel = defaultLevel;
+    }
+
+    public Level getDefaultExceptionLevel() {
+        return defaultExceptionLevel;
+    }
+
+    public void setDefaultExceptionLevel(Level defaultExceptionLevel) {
+        this.defaultExceptionLevel = defaultExceptionLevel;
     }
 }

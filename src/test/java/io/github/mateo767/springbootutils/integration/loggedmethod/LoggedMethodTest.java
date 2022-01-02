@@ -157,7 +157,7 @@ class LoggedMethodTest {
     }
 
     @Test
-    void logMethodWithArgumentsAndThrowableAndTimingToDebug() {
+    void logMethodWithArgumentsAndThrowableAndTimingInvocationToDebugAndExceptionToWarn() {
         // given
         var logger = (Logger) LoggerFactory.getLogger(LoggedMethodService.class);
         var listAppender = new ListAppender<ILoggingEvent>();
@@ -166,14 +166,14 @@ class LoggedMethodTest {
 
         // when
         assertThrows(LoggedMethodService.ServiceException.class, () ->
-                loggedMethodService.logMethodWithArgumentsAndThrowableAndTimingToDebug("arg_1", 1, new SomeObject("sF", 0)));
+                loggedMethodService.logMethodWithArgumentsAndThrowableAndTimingInvocationToDebugAndExceptionToWarn("arg_1", 1, new SomeObject("sF", 0)));
 
         // then
         var logs = listAppender.list;
         assertEquals(Level.DEBUG, listAppender.list.get(0).getLevel());
-        assertEquals(Level.DEBUG, listAppender.list.get(1).getLevel());
-        assertEquals("Invoked logMethodWithArgumentsAndThrowableAndTimingToDebug(arg_1, 1, SomeObject(sField=sF, iField=0))", logs.get(0).getFormattedMessage());
-        assertTrue(logs.get(1).getFormattedMessage().startsWith("Method logMethodWithArgumentsAndThrowableAndTimingToDebug threw ServiceException(message=message) in "));
+        assertEquals(Level.WARN, listAppender.list.get(1).getLevel());
+        assertEquals("Invoked logMethodWithArgumentsAndThrowableAndTimingInvocationToDebugAndExceptionToWarn(arg_1, 1, SomeObject(sField=sF, iField=0))", logs.get(0).getFormattedMessage());
+        assertTrue(logs.get(1).getFormattedMessage().startsWith("Method logMethodWithArgumentsAndThrowableAndTimingInvocationToDebugAndExceptionToWarn threw ServiceException(message=message) in "));
     }
 
     @Test
@@ -197,7 +197,7 @@ class LoggedMethodTest {
     }
 
     @Test
-    void logMethodWithoutArgumentsAndWithoutThrowableAndWithTimingToInfo() {
+    void logMethodWithoutArgumentsAndWithoutThrowableAndWithTimingInvocationToDefaultAndExceptionToError() {
         // given
         var logger = (Logger) LoggerFactory.getLogger(LoggedMethodService.class);
         var listAppender = new ListAppender<ILoggingEvent>();
@@ -206,18 +206,18 @@ class LoggedMethodTest {
 
         // when
         assertThrows(LoggedMethodService.ServiceException.class, () ->
-                loggedMethodService.logMethodWithoutArgumentsAndWithoutThrowableAndWithTimingToInfo("arg_1", 1, new SomeObject("sF", 0)));
+                loggedMethodService.logMethodWithoutArgumentsAndWithoutThrowableAndWithTimingToDefault("arg_1", 1, new SomeObject("sF", 0)));
 
         // then
         var logs = listAppender.list;
         assertEquals(Level.INFO, listAppender.list.get(0).getLevel());
-        assertEquals(Level.INFO, listAppender.list.get(1).getLevel());
-        assertEquals("Invoked logMethodWithoutArgumentsAndWithoutThrowableAndWithTimingToInfo()", logs.get(0).getFormattedMessage());
-        assertTrue(logs.get(1).getFormattedMessage().startsWith("Method logMethodWithoutArgumentsAndWithoutThrowableAndWithTimingToInfo threw exception in "));
+        assertEquals(Level.ERROR, listAppender.list.get(1).getLevel());
+        assertEquals("Invoked logMethodWithoutArgumentsAndWithoutThrowableAndWithTimingToDefault()", logs.get(0).getFormattedMessage());
+        assertTrue(logs.get(1).getFormattedMessage().startsWith("Method logMethodWithoutArgumentsAndWithoutThrowableAndWithTimingToDefault threw exception in "));
     }
 
     @Test
-    void logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToInfo() {
+    void logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToDefault() {
         // given
         var logger = (Logger) LoggerFactory.getLogger(LoggedMethodService.class);
         var listAppender = new ListAppender<ILoggingEvent>();
@@ -226,14 +226,14 @@ class LoggedMethodTest {
 
         // when
         assertThrows(LoggedMethodService.ServiceException.class, () ->
-                loggedMethodService.logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToInfo("arg_1", 1, new SomeObject("sF", 0)));
+                loggedMethodService.logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToDefault("arg_1", 1, new SomeObject("sF", 0)));
 
         // then
         var logs = listAppender.list;
         assertEquals(Level.INFO, listAppender.list.get(0).getLevel());
-        assertEquals(Level.INFO, listAppender.list.get(1).getLevel());
-        assertEquals("Invoked logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToInfo()", logs.get(0).getFormattedMessage());
-        assertTrue(logs.get(1).getFormattedMessage().startsWith("Method logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToInfo threw exception"));
+        assertEquals(Level.ERROR, listAppender.list.get(1).getLevel());
+        assertEquals("Invoked logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToDefault()", logs.get(0).getFormattedMessage());
+        assertTrue(logs.get(1).getFormattedMessage().startsWith("Method logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToDefault threw exception"));
     }
 
     @Test

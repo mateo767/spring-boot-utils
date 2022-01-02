@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
  */
 class LoggedMethodProcessorFailureTest {
 
-    private final LoggedMethodProcessor instance = new LoggedMethodProcessor(Level.DEFAULT);
+    private final LoggedMethodProcessor instance = new LoggedMethodProcessor(Level.DEFAULT, Level.DEFAULT);
 
     @Test
     void invokeWithWrongJoinPointKind_shouldThrowException() {

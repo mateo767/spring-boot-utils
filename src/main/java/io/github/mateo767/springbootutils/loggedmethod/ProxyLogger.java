@@ -9,7 +9,7 @@ class ProxyLogger {
     private final Logger targetLogger;
     private final Level level;
 
-    ProxyLogger(Logger targetLogger, Level level) {
+    private ProxyLogger(Logger targetLogger, Level level) {
         this.targetLogger = targetLogger;
         this.level = level;
     }
@@ -49,6 +49,19 @@ class ProxyLogger {
         @Override
         public String toString() {
             return Arrays.toString(arguments).replaceAll("(^\\[)|(]$)", "");
+        }
+    }
+
+    static class ProxyLoggerFactory {
+
+        private final Logger targetLogger;
+
+        public ProxyLoggerFactory(Logger targetLogger) {
+            this.targetLogger = targetLogger;
+        }
+
+        public ProxyLogger create(Level level) {
+            return new ProxyLogger(targetLogger, level);
         }
     }
 }

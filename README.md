@@ -90,7 +90,7 @@ You can also adjust base value for thread id by using configuration property in 
 The default is `0`.
 
 ```
-dv.utils.thread-name.initial-thread-id: 1000000
+spring-boot-utils.thread-name.initial-thread-id: 1000000
 ```
 
 <a id="thread-name.usage">
@@ -154,7 +154,7 @@ void someMethod() {
 ```
 ... and configuration property
 ```
-dv.utils.thread-name.initial-thread-id: 9000
+spring-boot-utils.thread-name.initial-thread-id: 9000
 ```
 ... will produce thread name `Thread-9000`.
 
@@ -174,11 +174,15 @@ Allows printing message through slf4j logger before and after method invocation 
 
 Before using annotation, just configure it with `@EnableSpringBootUtils` or `@EnableLoggedMethod` on any configuration class.
 
-You can also adjust default logging level for created messages by using configuration property in `application.properties` or `application.yml` file. 
-The default level is `info`.
+You can also adjust default logging level for created messages by using configuration properties in `application.properties` or `application.yml` file.
+
+The default level for non-exception messages is `info`.
+
+The default level for exception messages is `error`.
 
 ```
-dv.utils.logged-method.default-level: info
+spring-boot-utils.logged-method.default-level: info
+spring-boot-utils.logged-method.default-exception-level: error
 ```
 
 <a id="logged-method.usage">
@@ -200,6 +204,7 @@ To use it, just annotate any method with `@LoggedMethod`. By default, this will 
 You can customize messages with annotation parameters:
 
 * `level` - changes logging level for certain method only, can be one of `DEFAULT`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`;
+* `exceptionLevel` - changes exception logging level for certain method only, can be one of `DEFAULT`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`;
 * `logArguments` - controls logging method argument values;
 * `logResult` - controls logging return value (if any);
 * `timing` - controls logging execution duration;
@@ -248,7 +253,7 @@ Method someMethod finished
 ---
 
 ```
-@LoggedMethod(level = Level.DEBUG)
+@LoggedMethod(level = Level.DEBUG, exceptionLevel = Level.WARN)
 String someMethod(String arg) {
     throw new NullPointerException("text");
 }
@@ -257,9 +262,12 @@ String someMethod(String arg) {
 ```
 instance.someMethod("value");
 ```
-... will produce `DEBUG` messages:
+... will produce `DEBUG` message:
 ```
 Invoked someMethod(value)
+```
+... and `WARN` message:
+```
 Method someMethod threw NullPointerException(message=text)
 ```
 

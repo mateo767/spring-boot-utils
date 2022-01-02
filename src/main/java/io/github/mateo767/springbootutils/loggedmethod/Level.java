@@ -5,7 +5,7 @@ package io.github.mateo767.springbootutils.loggedmethod;
  */
 public enum Level {
     /**
-     * Print logs at the default level. If unchanged, it is the same as INFO.
+     * Print logs at the default level.
      */
     DEFAULT,
     /**

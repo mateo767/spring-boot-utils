@@ -5,13 +5,15 @@ import java.lang.annotation.Annotation;
 class LoggedMethodPropertyResolver {
 
     private final Level defaultLevel;
+    private final Level exceptionLevel;
 
-    private LoggedMethodPropertyResolver(Level defaultLevel) {
+    private LoggedMethodPropertyResolver(Level defaultLevel, Level exceptionLevel) {
         this.defaultLevel = defaultLevel;
+        this.exceptionLevel = exceptionLevel;
     }
 
-    public static LoggedMethodPropertyResolver create(Level level) {
-        return new LoggedMethodPropertyResolver(level);
+    public static LoggedMethodPropertyResolver create(Level level, Level exceptionLevel) {
+        return new LoggedMethodPropertyResolver(level, exceptionLevel);
     }
 
     LoggedMethod resolveProperties(LoggedMethod methodAnnotation) {
@@ -26,6 +28,13 @@ class LoggedMethodPropertyResolver {
                 return methodAnnotation.level() == Level.DEFAULT
                         ? defaultLevel
                         : methodAnnotation.level();
+            }
+
+            @Override
+            public Level exceptionLevel() {
+                return methodAnnotation.exceptionLevel() == Level.DEFAULT
+                        ? exceptionLevel
+                        : methodAnnotation.exceptionLevel();
             }
 
             @Override

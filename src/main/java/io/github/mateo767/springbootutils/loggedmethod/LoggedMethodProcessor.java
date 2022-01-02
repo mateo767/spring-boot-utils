@@ -28,8 +28,8 @@ class LoggedMethodProcessor {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final LoggedMethodPropertyResolver propertyResolver;
 
-    LoggedMethodProcessor(Level defaultLevel) {
-        this.propertyResolver = LoggedMethodPropertyResolver.create(defaultLevel);
+    LoggedMethodProcessor(Level defaultLevel, Level defaultExceptionLevel) {
+        this.propertyResolver = LoggedMethodPropertyResolver.create(defaultLevel, defaultExceptionLevel);
     }
 
     @Around("@annotation(io.github.mateo767.springbootutils.loggedmethod.LoggedMethod)")
@@ -42,9 +42,8 @@ class LoggedMethodProcessor {
         var methodSignature = (MethodSignature) joinPoint.getSignature();
         var annotation = getResolvedAnnotation(methodSignature);
 
-        var logger = new ProxyLogger(
-                LoggerFactory.getLogger(methodSignature.getDeclaringType()),
-                annotation.level());
+        var loggerFactory = new ProxyLogger.ProxyLoggerFactory(LoggerFactory.getLogger(methodSignature.getDeclaringType()));
+        var logger = loggerFactory.create(annotation.level());
 
         logMethodInvocation(annotation, logger, joinPoint, methodSignature);
         var start = System.currentTimeMillis();
@@ -53,7 +52,8 @@ class LoggedMethodProcessor {
             logMethodFinished(annotation, logger, methodSignature, result, start);
             return result;
         } catch (Throwable t) {
-            logThrowable(annotation, logger, methodSignature, t, start);
+            var exceptionLogger = loggerFactory.create(annotation.exceptionLevel());
+            logThrowable(annotation, exceptionLogger, methodSignature, t, start);
             throw t;
         }
     }

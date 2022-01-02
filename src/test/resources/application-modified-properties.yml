@@ -1,3 +1,4 @@
 spring-boot-utils:
   logged-method:
     default-level: debug
+    default-exception-level: warn

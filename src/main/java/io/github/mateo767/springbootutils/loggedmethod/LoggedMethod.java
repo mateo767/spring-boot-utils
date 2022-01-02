@@ -20,9 +20,16 @@ public @interface LoggedMethod {
     /**
      * Default level denotes that logging level should be taken from configuration property. If unchanged it's INFO.
      *
-     * @return the level to write logs at
+     * @return the level to write non-exception logs at
      */
     Level level() default Level.DEFAULT;
+
+    /**
+     * Default exception level denotes that logging level should be taken from configuration property. If unchanged it's ERROR.
+     *
+     * @return the level to write exception logs at
+     */
+    Level exceptionLevel() default Level.DEFAULT;
 
     /**
      * Allows controlling whether arguments values should be logged.

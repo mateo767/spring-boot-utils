@@ -14,9 +14,11 @@ class ProxyLoggerTest {
     void createProxyLoggerWihLevel_andInvoke_shouldPrintToProperLevel(Level level) {
         // given
         var logger = mock(Logger.class);
+        var proxyLogger= new ProxyLogger.ProxyLoggerFactory(logger)
+                .create(level);
 
         // when
-        new ProxyLogger(logger, level).log("message");
+        proxyLogger.log("message");
 
         // then
         LoggerAssertions.create(logger)

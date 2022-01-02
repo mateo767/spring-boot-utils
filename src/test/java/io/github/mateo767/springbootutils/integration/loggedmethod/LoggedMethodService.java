@@ -44,8 +44,8 @@ class LoggedMethodService {
         // do nothing
     }
 
-    @LoggedMethod(level = Level.DEBUG)
-    String logMethodWithArgumentsAndThrowableAndTimingToDebug(String arg1, int arg2, SomeObject arg3) {
+    @LoggedMethod(level = Level.DEBUG, exceptionLevel = Level.WARN)
+    String logMethodWithArgumentsAndThrowableAndTimingInvocationToDebugAndExceptionToWarn(String arg1, int arg2, SomeObject arg3) {
         throw new ServiceException("message");
     }
 
@@ -55,12 +55,12 @@ class LoggedMethodService {
     }
 
     @LoggedMethod(logArguments = false, logResult = false)
-    String logMethodWithoutArgumentsAndWithoutThrowableAndWithTimingToInfo(String arg1, int arg2, SomeObject arg3) {
+    String logMethodWithoutArgumentsAndWithoutThrowableAndWithTimingToDefault(String arg1, int arg2, SomeObject arg3) {
         throw new ServiceException("message");
     }
 
     @LoggedMethod(logArguments = false, logResult = false, timing = false)
-    String logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToInfo(String arg1, int arg2, SomeObject arg3) {
+    String logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToDefault(String arg1, int arg2, SomeObject arg3) {
         throw new ServiceException("message");
     }
 
