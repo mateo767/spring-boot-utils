@@ -217,6 +217,26 @@ class LoggedMethodTest {
     }
 
     @Test
+    void logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToInfo() {
+        // given
+        var logger = (Logger) LoggerFactory.getLogger(LoggedMethodService.class);
+        var listAppender = new ListAppender<ILoggingEvent>();
+        listAppender.start();
+        logger.addAppender(listAppender);
+
+        // when
+        assertThrows(LoggedMethodService.ServiceException.class, () ->
+                loggedMethodService.logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToInfo("arg_1", 1, new SomeObject("sF", 0)));
+
+        // then
+        var logs = listAppender.list;
+        assertEquals(Level.INFO, listAppender.list.get(0).getLevel());
+        assertEquals(Level.INFO, listAppender.list.get(1).getLevel());
+        assertEquals("Invoked logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToInfo()", logs.get(0).getFormattedMessage());
+        assertTrue(logs.get(1).getFormattedMessage().startsWith("Method logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToInfo threw exception"));
+    }
+
+    @Test
     void logMethodWithoutArgumentsAndWithoutResultAndWithTimingToInfo() {
         // given
         var logger = (Logger) LoggerFactory.getLogger(LoggedMethodService.class);

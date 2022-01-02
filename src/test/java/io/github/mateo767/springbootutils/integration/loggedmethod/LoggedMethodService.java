@@ -59,6 +59,11 @@ class LoggedMethodService {
         throw new ServiceException("message");
     }
 
+    @LoggedMethod(logArguments = false, logResult = false, timing = false)
+    String logMethodWithoutArgumentsAndWithoutThrowableAndWithoutTimingToInfo(String arg1, int arg2, SomeObject arg3) {
+        throw new ServiceException("message");
+    }
+
     @LoggedMethod(logArguments = false, logResult = false)
     String logMethodWithoutArgumentsAndWithoutResultAndWithTimingToInfo(String arg1, int arg2, SomeObject arg3) {
         return "res";

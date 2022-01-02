@@ -1,0 +1,3 @@
+spring-boot-utils:
+  logged-method:
+    default-level: debug

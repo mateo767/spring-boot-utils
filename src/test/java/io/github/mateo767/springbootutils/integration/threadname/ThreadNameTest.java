@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest(classes = ThreadNameStarter.class)
@@ -19,9 +20,34 @@ class ThreadNameTest {
     }
 
     @Test
-    void threadNameWithPrefixAndThreadId() {
-        assertTrue(threadNameService.getThreadName()
-                .startsWith("Prefix-9"));
+    void threadNameWithPrefixAndThreadId_shouldRestoreOldThreadName() {
+        // given
+        var oldName = Thread.currentThread().getName();
+        var testThreadName = "7f9fc8db-a9d9-4542-a509-99a13c26829c";
+        Thread.currentThread().setName(testThreadName);
+
+        // when
+        var serviceThreadName = threadNameService.getThreadName();
+
+        // then
+        assertTrue(serviceThreadName.startsWith("Prefix-9"));
+        assertEquals(testThreadName, Thread.currentThread().getName());
+        Thread.currentThread().setName(oldName);
+    }
+
+
+    @Test
+    void threadNameWithPrefixAndThreadId_shouldNotRestoreOldThreadName() {
+        // given
+        var oldName = Thread.currentThread().getName();
+
+        // when
+        var name = threadNameService.getThreadNameDontRestoreName();
+
+        // then
+        assertTrue(name.startsWith("Prefix-9"));
+        assertTrue(Thread.currentThread().getName().startsWith("Prefix-9"));
+        Thread.currentThread().setName(oldName);
     }
 
     @Test
