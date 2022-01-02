@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("spring-boot-utils.logged-method")
 class LoggedMethodProperties {
 
-    private Level defaultLevel = Level.INFO;
+    private Level defaultLevel = Level.DEFAULT;
 
     public Level getDefaultLevel() {
         return defaultLevel;

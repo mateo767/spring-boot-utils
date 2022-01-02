@@ -17,6 +17,12 @@ class ThreadNameService {
         return Thread.currentThread().getName();
     }
 
+    @ThreadName(prefix = "Prefix", restoreName = false)
+    String getThreadNameDontRestoreName() {
+        log.info(Thread.currentThread().getName());
+        return Thread.currentThread().getName();
+    }
+
     @ThreadName(prefix = "Prefix", expressions = {"#arg1", "#arg2"})
     @SuppressWarnings({"SameParameterValue", "unused"})
     String getThreadNameWithArguments(String arg1, int arg2) {

@@ -26,10 +26,10 @@ class LoggedMethodProcessor {
     private static final String TIMING_PATTERN = " in {} ms";
     private static final String EXCLUDED_ARGUMENT_REPLACEMENT = "●●●●";
     private final Logger log = LoggerFactory.getLogger(this.getClass());
-    private final Level defaultLevel;
+    private final LoggedMethodPropertyResolver propertyResolver;
 
     LoggedMethodProcessor(Level defaultLevel) {
-        this.defaultLevel = defaultLevel;
+        this.propertyResolver = LoggedMethodPropertyResolver.create(defaultLevel);
     }
 
     @Around("@annotation(io.github.mateo767.springbootutils.loggedmethod.LoggedMethod)")
@@ -40,29 +40,34 @@ class LoggedMethodProcessor {
         }
 
         var methodSignature = (MethodSignature) joinPoint.getSignature();
-        var lmAnnotation = Optional.ofNullable(
+        var annotation = getResolvedAnnotation(methodSignature);
+
+        var logger = new ProxyLogger(
+                LoggerFactory.getLogger(methodSignature.getDeclaringType()),
+                annotation.level());
+
+        logMethodInvocation(annotation, logger, joinPoint, methodSignature);
+        var start = System.currentTimeMillis();
+        try {
+            var result = joinPoint.proceed();
+            logMethodFinished(annotation, logger, methodSignature, result, start);
+            return result;
+        } catch (Throwable t) {
+            logThrowable(annotation, logger, methodSignature, t, start);
+            throw t;
+        }
+    }
+
+    private LoggedMethod getResolvedAnnotation(MethodSignature methodSignature) {
+        return Optional.ofNullable(
                         AnnotatedElementUtils.findMergedAnnotation(
                                 methodSignature.getMethod(),
                                 LoggedMethod.class))
+                .map(propertyResolver::resolveProperties)
                 .orElseThrow(() -> {
                     log.error("Annotation cannot be null - possible wrong pointcut expression");
                     return new NullPointerException("annotation cannot be null");
                 });
-
-        var logger = new ProxyLogger(
-                LoggerFactory.getLogger(methodSignature.getDeclaringType()),
-                lmAnnotation.level() == Level.DEFAULT ? defaultLevel : lmAnnotation.level());
-
-        logMethodInvocation(lmAnnotation, logger, joinPoint, methodSignature);
-        var start = System.currentTimeMillis();
-        try {
-            var result = joinPoint.proceed();
-            logMethodFinished(lmAnnotation, logger, methodSignature, result, start);
-            return result;
-        } catch (Throwable t) {
-            logThrowable(lmAnnotation, logger, methodSignature, t, start);
-            throw t;
-        }
     }
 
     private void logMethodInvocation(
