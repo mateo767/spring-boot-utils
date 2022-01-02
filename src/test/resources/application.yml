@@ -1,0 +1,6 @@
+spring-boot-utils:
+  thread-name:
+    initial-thread-id: 9000000
+logging:
+  level:
+    io.github.mateo767.springbootutils: debug
